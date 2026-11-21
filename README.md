@@ -1,171 +1,134 @@
 
 <div align="center">
 
-# ✦ Luz ✦
+# ✦ Luz
+
 ### Assistente Virtual com Inteligência Artificial e RAG
 
-**Um assistente acadêmico que combina inteligência artificial, busca semântica e banco de dados vetorial.**
+Projeto acadêmico desenvolvido com Python, Streamlit, Supabase e Google Gemini.
 
-<br>
+![Python](https://img.shields.io/badge/Python-3.11-3776AB?style=flat-square&logo=python&logoColor=white)
+![Streamlit](https://img.shields.io/badge/Streamlit-Interface-FF4B4B?style=flat-square&logo=streamlit&logoColor=white)
+![Supabase](https://img.shields.io/badge/Supabase-PostgreSQL-3ECF8E?style=flat-square&logo=supabase&logoColor=white)
+![Gemini](https://img.shields.io/badge/Google-Gemini-4285F4?style=flat-square&logo=google&logoColor=white)
 
-![Python](https://img.shields.io/badge/Python-3.11-3776AB?style=for-the-badge&logo=python&logoColor=white)
-![Streamlit](https://img.shields.io/badge/Streamlit-Interface-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)
-![Supabase](https://img.shields.io/badge/Supabase-PostgreSQL-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white)
-![Gemini](https://img.shields.io/badge/Google-Gemini-8E75B2?style=for-the-badge&logo=google&logoColor=white)
-
-<br>
-
-**[🎬 Assistir à demonstração](https://drive.google.com/file/d/1gfw1qtXQEvetRTvU8UAAM5m3P1nGp21b/view?usp=sharing)**
+[Vídeo demonstrativo](https://drive.google.com/file/d/1gfw1qtXQEvetRTvU8UAAM5m3P1nGp21b/view?usp=sharing)
 
 </div>
 
 ---
 
-## ✨ Sobre o projeto
+## Sobre o projeto
 
 O **Luz** é um assistente virtual desenvolvido para responder perguntas utilizando inteligência artificial e informações armazenadas em um banco de dados vetorial.
 
-A aplicação foi criada em Python, com interface desenvolvida no Streamlit, integração com o Google Gemini e armazenamento de documentos acadêmicos no Supabase.
+A aplicação foi construída em Python, com interface desenvolvida no Streamlit, integração com o Google Gemini e armazenamento de documentos acadêmicos no Supabase.
 
-O principal diferencial do projeto é a utilização da arquitetura **RAG (Retrieval-Augmented Generation)**, que permite recuperar informações relevantes antes de gerar uma resposta.
+O projeto utiliza a arquitetura **RAG (Retrieval-Augmented Generation)**, que permite recuperar informações relevantes de uma base de conhecimento antes de gerar uma resposta.
 
-O assistente também consegue responder perguntas gerais, funcionando como uma aplicação que combina conversação com inteligência artificial e recuperação de conhecimento.
+Além das consultas acadêmicas, o assistente também permite realizar perguntas gerais utilizando o Gemini.
 
-> 💡 **Proposta:** desenvolver um assistente acadêmico capaz de utilizar busca semântica e inteligência artificial generativa para facilitar o acesso a informações.
+## Tecnologias utilizadas
 
----
+| Tecnologia | Finalidade |
+|---|---|
+| Python | Desenvolvimento da aplicação |
+| Streamlit | Interface web |
+| Supabase | Armazenamento dos documentos |
+| PostgreSQL | Banco de dados relacional |
+| pgvector | Busca por similaridade vetorial |
+| SentenceTransformers | Geração de embeddings |
+| all-MiniLM-L6-v2 | Modelo de embeddings com 384 dimensões |
+| Google Gemini | Geração de respostas |
 
-## 🖥️ Conheça o Luz
+## Arquitetura e funcionamento
 
-A interface foi desenvolvida com uma identidade visual leve, utilizando tons suaves e elementos simples para tornar a experiência mais agradável.
+O sistema trabalha com dois tipos de consulta.
 
-### ✦ Tela inicial
+**Perguntas gerais:** são respondidas pelo Google Gemini, sem necessidade de consultar a base de conhecimento acadêmica.
 
-<div align="center">
-  <img src="docs/imagens/tela-inicial.png" alt="Tela inicial do Luz" width="850">
-</div>
+**Perguntas acadêmicas:** utilizam a arquitetura RAG, recuperando documentos relevantes antes da geração da resposta.
 
-### ✦ Exemplo de pergunta
-
-<div align="center">
-  <img src="docs/imagens/consulta.png" alt="Pergunta enviada ao assistente" width="850">
-</div>
-
-### ✦ Resposta gerada pelo assistente
-
-<div align="center">
-  <img src="docs/imagens/resposta-rag.png" alt="Resposta do Luz utilizando RAG" width="850">
-</div>
-
-### ✦ Recuperação de documentos
-
-<div align="center">
-  <img src="docs/imagens/fontes-vetoriais.png" alt="Documentos recuperados pela busca vetorial" width="850">
-</div>
-
-A aplicação permite visualizar os documentos recuperados e seus valores de similaridade, demonstrando como a busca vetorial contribui para a construção das respostas.
-
----
-
-## 🧠 Como funciona?
-
-O sistema possui dois tipos de atendimento.
-
-**💬 Conversação geral**
-
-Quando o usuário faz uma pergunta que não depende da base acadêmica, o Luz utiliza o Google Gemini para gerar a resposta.
-
-**📚 Consulta acadêmica com RAG**
-
-Quando a pergunta está relacionada aos conteúdos acadêmicos, o sistema consulta o banco de dados vetorial e recupera documentos relevantes antes de gerar a resposta.
-
-### ✦ Etapas da arquitetura RAG
+### Fluxo do RAG
 
 ```text
-        👤 Usuário
-             │
-             ▼
-      Pergunta enviada
-             │
-             ▼
-     Geração do embedding
-       SentenceTransformers
-             │
-             ▼
-      Busca semântica
-      Supabase + pgvector
-             │
-             ▼
-     Documentos relevantes
-             │
-             ▼
-        Google Gemini
-             │
-             ▼
-      Resposta ao usuário
+Pergunta do usuário
+        |
+        v
+Geração do embedding
+  SentenceTransformers
+        |
+        v
+Busca vetorial no Supabase
+        |
+        v
+Recuperação de documentos
+        |
+        v
+Envio do contexto ao Gemini
+        |
+        v
+Resposta ao usuário
 ```
 
-O processo utiliza embeddings para representar o significado dos textos em vetores numéricos, permitindo recuperar informações semanticamente relacionadas à pergunta.
+O modelo `all-MiniLM-L6-v2` transforma a pergunta em um vetor numérico. Esse vetor é comparado aos embeddings armazenados no banco de dados para identificar documentos semanticamente relacionados.
 
----
+Os conteúdos recuperados são utilizados como contexto pelo Gemini para gerar a resposta.
 
-## 🛠️ Tecnologias utilizadas
+## Banco de dados e base de conhecimento
 
-| Tecnologia | Utilização |
-|:---|:---|
-| 🐍 **Python** | Desenvolvimento da aplicação |
-| 🎨 **Streamlit** | Interface web |
-| 🗄️ **Supabase** | Armazenamento dos documentos |
-| 🐘 **PostgreSQL** | Banco de dados |
-| 🔎 **pgvector** | Busca por similaridade vetorial |
-| 🧠 **SentenceTransformers** | Geração de embeddings |
-| 🤖 **Google Gemini** | Geração de respostas |
-| ☁️ **Google AI Studio** | Acesso à API do Gemini |
+O banco de dados foi implementado no Supabase, utilizando PostgreSQL e a extensão pgvector.
 
-### Modelo de embeddings
+A tabela `documentos_lumina` armazena os documentos e seus respectivos embeddings. A função SQL `buscar_documentos_lumina` realiza a recuperação de documentos por similaridade vetorial.
 
-Foi utilizado o modelo **`all-MiniLM-L6-v2`**, que transforma textos em vetores de 384 dimensões.
+O script de configuração está disponível em `docs/banco.sql`.
 
-Esses vetores são armazenados no banco de dados e utilizados para comparar semanticamente as perguntas com os documentos disponíveis.
+Para demonstrar o funcionamento do sistema, foi criada uma base fictícia com seis documentos acadêmicos:
 
----
+- Matrículas e rematrículas;
+- Avaliações acadêmicas;
+- Biblioteca;
+- Documentos acadêmicos;
+- Atendimento ao estudante;
+- Bolsas e benefícios.
 
-## 📚 Base de conhecimento
+Os conteúdos estão disponíveis em `docs/conhecimento.txt` e são carregados no banco pelo script `carregar_dados.py`.
 
-Para demonstrar o funcionamento do RAG, foi criada uma base fictícia com seis documentos relacionados ao ambiente acadêmico.
+Os dados são fictícios e foram utilizados exclusivamente para fins acadêmicos.
 
-| Documento | Conteúdo |
-|:---|:---|
-| 📋 Matrículas | Informações sobre matrícula e rematrícula |
-| 📝 Avaliações | Orientações sobre avaliações acadêmicas |
-| 📖 Biblioteca | Informações sobre serviços da biblioteca |
-| 📄 Documentos | Solicitação de documentos acadêmicos |
-| 🎓 Atendimento | Orientações sobre atendimento ao estudante |
-| 💜 Bolsas e benefícios | Informações sobre benefícios estudantis |
+## Interface e demonstração
 
-Os conteúdos estão disponíveis no arquivo `docs/conhecimento.txt`.
+A interface foi desenvolvida com Streamlit, permitindo realizar perguntas, visualizar as respostas e consultar os documentos recuperados durante as buscas acadêmicas.
 
-**Observação:** os documentos são fictícios e foram criados exclusivamente para fins acadêmicos e demonstrativos.
+### Tela inicial
 
----
+<div align="center">
+  <img src="docs/imagens/tela-inicial.png" alt="Tela inicial do assistente Luz" width="800">
+</div>
 
-## 🗄️ Banco de dados vetorial
+### Exemplo de consulta
 
-O banco de dados foi implementado no **Supabase**, utilizando PostgreSQL e a extensão pgvector.
+<div align="center">
+  <img src="docs/imagens/consulta.png" alt="Pergunta enviada ao assistente" width="800">
+</div>
 
-A tabela `documentos_lumina` armazena os documentos e seus respectivos embeddings.
+### Resposta utilizando RAG
 
-A função SQL `buscar_documentos_lumina` realiza a recuperação de informações por similaridade vetorial.
+<div align="center">
+  <img src="docs/imagens/resposta-rag.png" alt="Resposta gerada pelo assistente" width="800">
+</div>
 
-O processo permite encontrar documentos relacionados ao significado da pergunta, mesmo quando os termos utilizados são diferentes.
+### Documentos recuperados
 
-O script de configuração do banco está disponível em:
+<div align="center">
+  <img src="docs/imagens/fontes-vetoriais.png" alt="Documentos recuperados pela busca semântica" width="800">
+</div>
 
-`docs/banco.sql`
+Os valores de similaridade exibidos representam a proximidade entre os embeddings da pergunta e dos documentos recuperados, não uma medida de certeza da resposta.
 
----
+**Demonstração completa:** [Assistir ao vídeo no Google Drive](https://drive.google.com/file/d/1gfw1qtXQEvetRTvU8UAAM5m3P1nGp21b/view?usp=sharing)
 
-## 🚀 Como executar o projeto
+## Como executar o projeto
 
 ### 1. Clonar o repositório
 
@@ -174,15 +137,10 @@ git clone https://github.com/RonaldSE414/luz-assistente-ia.git
 cd luz-assistente-ia
 ```
 
-### 2. Criar o ambiente virtual
-
-```bash
-python -m venv .venv
-```
-
-No Windows PowerShell:
+### 2. Criar e ativar o ambiente virtual
 
 ```powershell
+python -m venv .venv
 .\.venv\Scripts\Activate.ps1
 ```
 
@@ -194,21 +152,19 @@ pip install -r requirements.txt
 
 ### 4. Configurar o Supabase
 
-No painel do Supabase, acesse o **SQL Editor** e execute o conteúdo do arquivo `docs/banco.sql`.
+No SQL Editor do Supabase, execute o conteúdo do arquivo `docs/banco.sql`.
 
 ### 5. Configurar as variáveis de ambiente
 
-Crie o arquivo `.env` com base no `.env.example`.
-
-No PowerShell:
+Crie o arquivo `.env` a partir do modelo disponibilizado no projeto:
 
 ```powershell
 Copy-Item .env.example .env
 ```
 
-Preencha as variáveis com as credenciais do seu projeto Supabase e a chave de API do Gemini, seguindo os nomes definidos no `.env.example`.
+Preencha as variáveis com as credenciais do Supabase e a chave de API do Google Gemini, seguindo o arquivo `.env.example`.
 
-> 🔒 O arquivo `.env` contém informações privadas e não deve ser publicado no GitHub.
+O arquivo `.env` está incluído no `.gitignore` para evitar a publicação das credenciais.
 
 ### 6. Carregar os documentos
 
@@ -218,35 +174,15 @@ python carregar_dados.py
 
 Esse comando gera os embeddings e armazena os documentos no banco de dados.
 
-### 7. Executar o assistente
+### 7. Iniciar a aplicação
 
 ```bash
 streamlit run app.py
 ```
 
-Acesse o endereço apresentado no terminal, normalmente:
+A interface será disponibilizada no endereço informado pelo Streamlit, normalmente `http://localhost:8501`.
 
-**http://localhost:8501**
-
----
-
-## 🧪 Testes realizados
-
-Durante o desenvolvimento, foram realizados testes para verificar o funcionamento das principais funcionalidades.
-
-| Teste | Funcionalidade verificada |
-|:---|:---|
-| 💬 Pergunta geral | Geração de resposta pelo Gemini |
-| 📚 Pergunta acadêmica | Consulta à base de conhecimento |
-| 🔎 Busca semântica | Recuperação de documentos relevantes |
-| 🧠 Geração com RAG | Resposta utilizando o contexto recuperado |
-| 📊 Visualização das fontes | Exibição de documentos e similaridades |
-
-Os testes permitiram observar o funcionamento da integração entre interface, modelo de embeddings, banco vetorial e inteligência artificial generativa.
-
----
-
-## 📂 Estrutura do projeto
+## Estrutura do projeto
 
 ```text
 luz-assistente-ia/
@@ -276,52 +212,37 @@ luz-assistente-ia/
         └── fontes-vetoriais.png
 ```
 
+## Testes realizados
+
+Foram realizados testes com perguntas gerais e consultas relacionadas à base acadêmica, verificando a integração entre o Gemini, a busca vetorial e a interface.
+
+Entre as funcionalidades testadas estão:
+
+- Geração de respostas para perguntas gerais;
+- Recuperação de documentos acadêmicos;
+- Busca semântica utilizando embeddings;
+- Geração de respostas com contexto recuperado;
+- Exibição das fontes e dos valores de similaridade.
+
+## Limitações
+
+O projeto utiliza uma base de conhecimento reduzida e fictícia, composta por seis documentos acadêmicos.
+
+A identificação de perguntas acadêmicas depende de regras implementadas no código, e a geração de respostas está sujeita à disponibilidade da API do Gemini.
+
+O sistema foi desenvolvido para fins educacionais e demonstra o funcionamento de uma aplicação que integra banco de dados vetorial e inteligência artificial generativa.
+
 ---
 
-## ⚠️ Limitações
+## Informações acadêmicas
 
-O projeto utiliza uma base de conhecimento fictícia e reduzida, composta por seis documentos acadêmicos.
-
-A identificação das perguntas relacionadas ao conteúdo institucional depende de regras implementadas no código.
-
-Além disso, a geração de respostas depende da disponibilidade da API do Google Gemini.
-
-O sistema foi desenvolvido para fins educacionais, com foco na demonstração da arquitetura RAG e da busca semântica.
-
----
-
-## 🎥 Demonstração em vídeo
-
-O vídeo apresenta a interface do Luz e demonstra o funcionamento do assistente com perguntas e recuperação de documentos.
+**Aluno:** Ronald Machado Guimarães de Sousa  
+**Professor:** Anderson Soares  
+**Disciplina:** Projeto de Banco de Dados  
+**Ano:** 2026
 
 <div align="center">
 
-### ▶️ [Clique aqui para assistir à demonstração](https://drive.google.com/file/d/1gfw1qtXQEvetRTvU8UAAM5m3P1nGp21b/view?usp=sharing)
-
-</div>
-
----
-
-## 👨‍💻 Desenvolvimento
-
-**Aluno:** Ronald Machado Guimarães de Sousa
-
-**Professor:** Anderson Soares
-
-**Disciplina:** Projeto de Banco de Dados
-
-**Tema:** Banco de Dados Vetorial, Busca Semântica e RAG
-
----
-
-<div align="center">
-
-### ✦ Luz ✦
-
-*Inteligência artificial e conhecimento conectados em um só lugar.*
-
-**Projeto acadêmico — 2026**
-
-⭐
+**✦ Luz — Assistente Virtual com IA e RAG**
 
 </div>
