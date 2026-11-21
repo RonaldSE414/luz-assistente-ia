@@ -12,7 +12,6 @@ Projeto acadêmico desenvolvido com Python, Streamlit, Supabase e Google Gemini.
 ![Supabase](https://img.shields.io/badge/Supabase-PostgreSQL-3ECF8E?style=flat-square&logo=supabase&logoColor=white)
 ![Gemini](https://img.shields.io/badge/Google-Gemini-4285F4?style=flat-square&logo=google&logoColor=white)
 
-[Vídeo demonstrativo](https://drive.google.com/file/d/1gfw1qtXQEvetRTvU8UAAM5m3P1nGp21b/view?usp=sharing)
 
 </div>
 
