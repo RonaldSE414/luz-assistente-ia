@@ -126,7 +126,7 @@ A interface foi desenvolvida com Streamlit, permitindo realizar perguntas, visua
 
 Os valores de similaridade exibidos representam a proximidade entre os embeddings da pergunta e dos documentos recuperados, não uma medida de certeza da resposta.
 
-**Demonstração completa:** [Assistir ao vídeo no Google Drive](https://drive.google.com/file/d/1gfw1qtXQEvetRTvU8UAAM5m3P1nGp21b/view?usp=sharing)
+**Vídeo demonstrativo do sistema:** [Assistir ao vídeo no Google Drive](https://drive.google.com/file/d/1gfw1qtXQEvetRTvU8UAAM5m3P1nGp21b/view?usp=sharing)
 
 ## Como executar o projeto
 
