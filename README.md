@@ -17,15 +17,19 @@ Projeto acadêmico desenvolvido com Python, Streamlit, Supabase e Google Gemini.
 
 ---
 
+
 ## Sobre o projeto
 
-O **Luz** é um assistente virtual desenvolvido para responder perguntas utilizando inteligência artificial e informações armazenadas em um banco de dados vetorial.
+O **Luz** é um assistente virtual desenvolvido para auxiliar estudantes na consulta de informações acadêmicas, utilizando inteligência artificial e documentos armazenados em um banco de dados vetorial.
 
 A aplicação foi construída em Python, com interface desenvolvida no Streamlit, integração com o Google Gemini e armazenamento de documentos acadêmicos no Supabase.
 
-O projeto utiliza a arquitetura **RAG (Retrieval-Augmented Generation)**, que permite recuperar informações relevantes de uma base de conhecimento antes de gerar uma resposta.
+O projeto utiliza a arquitetura **RAG (Retrieval-Augmented Generation)**, que permite recuperar informações relevantes da base de conhecimento acadêmica antes de gerar uma resposta. Dessa forma, o assistente pode responder perguntas relacionadas a matrículas, avaliações, biblioteca, documentos acadêmicos e bolsas estudantis, utilizando os conteúdos cadastrados no banco de dados.
 
 Além das consultas acadêmicas, o assistente também permite realizar perguntas gerais utilizando o Gemini.
+
+Para demonstrar o funcionamento do sistema, foi utilizada uma base de conhecimento fictícia, desenvolvida exclusivamente para fins acadêmicos.
+
 
 ## Tecnologias utilizadas
 
